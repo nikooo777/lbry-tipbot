@@ -13,7 +13,7 @@ try {
   //No aliases defined
   aliases = {
     test: {
-      process: function(bot, msg) {
+      process: function (bot, msg) {
         msg.channel.send('test');
       }
     }
@@ -23,14 +23,14 @@ var commands = {};
 
 var bot = new Discord.Client();
 
-bot.on('ready', function() {
+bot.on('ready', function () {
   console.log('Logged in! Serving in ' + bot.guilds.array().length + ' servers');
   require('./plugins.js').init();
   console.log('type ' + config.prefix + 'help in Discord for a commands list.');
   bot.user.setGame(config.prefix + 'tip');
 });
 
-bot.on('disconnected', function() {
+bot.on('disconnected', function () {
   console.log('Disconnected!');
   process.exit(1); //exit node.js with an error
 });
@@ -88,21 +88,21 @@ bot.on('message', msg => checkMessageForCommand(msg, false));
   checkMessageForCommand(newMessage, true);
 });*/
 
-exports.addCommand = function(commandName, commandObject) {
+exports.addCommand = function (commandName, commandObject) {
   try {
     commands[commandName] = commandObject;
   } catch (err) {
     console.log(err);
   }
 };
-exports.addCustomFunc = function(customFunc) {
+exports.addCustomFunc = function (customFunc) {
   try {
     customFunc(bot);
   } catch (err) {
     console.log(err);
   }
 };
-exports.commandCount = function() {
+exports.commandCount = function () {
   return Object.keys(commands).length;
 };
 
